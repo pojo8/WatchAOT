@@ -3,6 +3,7 @@ package venous.data.aotanime.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +22,7 @@ public class SeasonController {
     private static final Logger LOGGER = LoggerFactory.getLogger(SeasonController.class);
 
 
+
     @Autowired
     SeasonRepository repository;
 
@@ -30,6 +32,20 @@ public class SeasonController {
     public List<Season> getSeason() {
 
         List<Season> seasons = repository.findAll();
+
+        for(Season season : seasons){
+            LOGGER.info("Title: {}", season.getTitle());
+        }
+        return seasons;
+    }
+
+    // Returns the information for season above and below elements
+    //http://localhost:8080/api/findSeasonNear?sid=1
+    @GetMapping("/api/findSeasonNear")
+    @ResponseBody
+    public List<Season> getSeasonNear(@RequestParam Integer sid) {
+
+        List<Season> seasons = repository.findSeasonBySeasonIdBetween(sid - 1, sid +1);
 
         for(Season season : seasons){
             LOGGER.info("Title: {}", season.getTitle());

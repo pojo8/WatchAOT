@@ -2,6 +2,7 @@ package venous.data.aotanime.model;
 
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity(name = "Season")
 @Table(name = "season_listings")
@@ -15,15 +16,19 @@ public class Season {
     private String title;
 
 //    @Column(nullable = false)
-    private String airedDate;
+    @Temporal(TemporalType.DATE)
+    private Date airedDate;
 
     private String description;
 
     private int viewed;
 
+    private String thumbnail;
+
+
     public Season(){}
 
-    public Season(Integer seasonId, String title, String airedDate, String description, int viewed, String thumbnail) {
+    public Season(Integer seasonId, String title, Date airedDate, String description, int viewed, String thumbnail) {
         this.seasonId = seasonId;
         this.title = title;
         this.airedDate = airedDate;
@@ -31,9 +36,6 @@ public class Season {
         this.viewed = viewed;
         this.thumbnail = thumbnail;
     }
-
-    private String thumbnail;
-
 
     public Integer getSeasonId() {
         return seasonId;
@@ -51,11 +53,11 @@ public class Season {
         this.title = title;
     }
 
-    public String getAiredDate() {
+    public Date getAiredDate() {
         return airedDate;
     }
 
-    public void setAiredDate(String airedDate) {
+    public void setAiredDate(Date airedDate) {
         this.airedDate = airedDate;
     }
 
