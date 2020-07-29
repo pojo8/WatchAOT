@@ -29,7 +29,7 @@ public class EpisodeController {
     @Autowired
     EpisodeRepository epRepository;
 
-    //http://localhost:8080/api/findAllSeason?sid=1
+    //http://localhost:8080/api/findAllEpisodes
     @GetMapping("/api/findAllEpisodes")
     @ResponseBody
     public List<Episode> getEpisodes() {
