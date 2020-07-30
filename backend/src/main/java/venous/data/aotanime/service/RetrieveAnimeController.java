@@ -1,15 +1,13 @@
 package venous.data.aotanime.service;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 public class RetrieveAnimeController {
 
     //http://localhost:8080/api/getSeason?sid=1
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/api/getSeason")
     @ResponseBody
     public String getSeason(@RequestParam String sid) {
@@ -17,6 +15,7 @@ public class RetrieveAnimeController {
     }
 
     //http://localhost:8080/api/getEpisode?eid=1
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/api/getEpisode")
     @ResponseBody
     public String getEpisode(@RequestParam String eid) {
@@ -24,6 +23,7 @@ public class RetrieveAnimeController {
     }
 
     //http://localhost:8080/api/getNext?eid=1
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/api/getNext")
     @ResponseBody
     public String getNext(@RequestParam String eid) {

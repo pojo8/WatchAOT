@@ -4,10 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import venous.data.aotanime.AotAnimeApplication;
 import venous.data.aotanime.model.Season;
 import venous.data.aotanime.repositories.SeasonRepository;
@@ -27,6 +24,7 @@ public class SeasonController {
     SeasonRepository repository;
 
     //http://localhost:8080/api/findAllSeason?sid=1
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/api/findAllSeason")
     @ResponseBody
     public List<Season> getSeason() {
@@ -41,6 +39,7 @@ public class SeasonController {
 
     // Returns the information for season above and below elements
     //http://localhost:8080/api/findSeasonNear?sid=1
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/api/findSeasonNear")
     @ResponseBody
     public List<Season> getSeasonNear(@RequestParam Integer sid) {
@@ -51,6 +50,16 @@ public class SeasonController {
             LOGGER.info("Title: {}", season.getTitle());
         }
         return seasons;
+    }
+
+    // Returns the information for season above and below elements
+    //http://localhost:8080/api/findSeasonNear?sid=1
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/api/geSeason")
+    @ResponseBody
+    public Season getSeason(@RequestParam Integer sid) {
+
+        return repository.findSeasonBySeasonId(sid);
     }
 
 }
