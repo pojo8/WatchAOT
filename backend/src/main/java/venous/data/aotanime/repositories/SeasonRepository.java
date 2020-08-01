@@ -1,10 +1,9 @@
 package venous.data.aotanime.repositories;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import venous.data.aotanime.model.Season;
+import venous.data.aotanime.models.Season;
 
 import java.util.List;
 
@@ -12,9 +11,9 @@ import java.util.List;
 public interface SeasonRepository extends JpaRepository<Season, Long> {
 
 
-    List<Season> findByTitleIs(String title);
+//    List<Season> findByTitleIs(String title);
 
-    List<Season> findSeasonBySeasonIdBetween(Integer beforeid, Integer idnext);
+    List<Season> findSeasonBySeasonIdBetween(Integer prevId, Integer nextId);
 
     @Query(value = "SELECT title, description, season_id, viewed, thumbnail FROM season_listings", nativeQuery = true)
     List<SeasonReduced> findAllSeasonsReduced();

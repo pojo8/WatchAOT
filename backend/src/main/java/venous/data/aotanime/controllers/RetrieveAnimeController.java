@@ -1,4 +1,4 @@
-package venous.data.aotanime.service;
+package venous.data.aotanime.controllers;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -29,5 +29,5 @@ public class RetrieveAnimeController {
     public String getNext(@RequestParam String eid) {
         return "Hello the Episodes around Id " + eid + "\n";
     }
-
+// may not be necessary, can just resend getEpisode request?
 }

@@ -1,4 +1,4 @@
-package venous.data.aotanime.model;
+package venous.data.aotanime.models;
 
 
 import javax.persistence.*;

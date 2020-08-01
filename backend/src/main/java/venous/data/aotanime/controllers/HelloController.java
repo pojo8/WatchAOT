@@ -1,4 +1,4 @@
-package venous.data.aotanime.service;
+package venous.data.aotanime.controllers;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
