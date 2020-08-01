@@ -1,10 +1,10 @@
 import React from "react";
-import Footer from "./components/Footer/Footer";
-import Navbar from "./components/Navbar/Navbar";
-import About from "./components/About/About";
-import Contact from "./components/Contact/Contact";
-import Episodes from "./components/Episodes/Episodes";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Episodes from "./components/Episodes";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -23,7 +23,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 export default function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <>
         <Navbar />
         <Switch>
@@ -34,7 +34,7 @@ export default function App() {
         </Switch>
         <Footer />
       </>
-    </Router>
+    </BrowserRouter>
   );
 }
 const Home = () => (

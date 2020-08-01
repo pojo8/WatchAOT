@@ -7,7 +7,7 @@ function Episodes() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/findAllEpisodes", {
+    fetch("http://localhost:8080/api/findAllEpisodesReduced", {
       method: "GET",
       headers: new Headers({}),
       // this bit kinda works but we need to do something
