@@ -3,7 +3,7 @@ package venous.data.aotanime;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jpa.repository.Query;
-import venous.data.aotanime.model.Season;
+import venous.data.aotanime.models.Season;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
