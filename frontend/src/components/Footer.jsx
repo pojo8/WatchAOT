@@ -3,7 +3,7 @@ import React from "react";
 function Footer() {
   return (
     <div>
-      <h1>This is the FOOTER </h1>
+      <p>Copyright © AotWatcher 2020. </p>
     </div>
   );
 }

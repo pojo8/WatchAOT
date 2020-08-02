@@ -30,6 +30,11 @@ const useStyles = makeStyles((theme) => {
       width: "100%",
       marginTop: 0,
     },
+    footer: {
+      position: 'absolute',
+      height: 40,
+      bottom: 0,
+    },
   };
 });
 
