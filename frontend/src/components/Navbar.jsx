@@ -1,32 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Tabs, Tab } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { Home } from "@material-ui/icons";
 
-// Link is part of react-router-dom router plugin that allows us to
-// link these listed items to the corresponding path in the router on App.js
-// Link only takes 1 prop, which is "to". it basically links the list item to a path.
-// notice that the plugin automatically makes them in to hyperlinks on the screen. plugins do the ground work for you!
+// Installed Material UI to use as our User Interface library. merged with React-router-dom to create a nicely styled navbar.
+
+const useStyles = makeStyles((theme) => {
+  return {
+    tabs: {
+      backgroundColor: theme.palette.primary.main,
+    },
+  };
+});
 
 function Navbar() {
+  const [tab, setTab] = useState({ value: 0 });
+  const classes = useStyles();
+  const handleChange = (event, value) => {
+    setTab({ value });
+  };
+
+  // --note-- eventually the Home component/link will be replaced with our logo, if any.
   return (
-    <nav>
-      <Link to="/">
-        <h1>Logo/home icon here</h1>
-      </Link>
-      <h3>This is the Navbar</h3>
-      <ul>
-        <Link to="/about">
-          <li>About</li>
-        </Link>
-        <Link to="/episodes">
-          <li>Episodes</li>
-        </Link>
-        <Link to="/contact">
-          <li>Contact</li>
-        </Link>
-        <li></li>
-        <li></li>
-      </ul>
-    </nav>
+    <>
+      <Tabs
+        value={tab.value}
+        onChange={handleChange}
+        indicatorColor={"secondary"}
+        className={classes.tabs}
+      >
+        <Tab label={<Home />} to="/" component={Link} />
+        <Tab label="About" to="/about" component={Link} />
+        <Tab label="Episodes" to="/episodes" component={Link} />
+        <Tab label="Contact" to="/contact" component={Link} />
+      </Tabs>
+    </>
   );
 }
 
