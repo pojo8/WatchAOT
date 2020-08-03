@@ -62,13 +62,16 @@ public class EpisodeController {
     }
 
     //http://localhost:8080/
-    // api/findEpisodeNear
+    // /api/episode/{eid}
     // ?eid=1
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/api/episode/{eid}")
     @ResponseBody
     public Episode getEpisode(@PathVariable String eid) {
+        //update the views
+        epRepository.updateEpisodeView(Integer.parseInt(eid));
 
         return epRepository.findAllByEpisodeId(Integer.parseInt(eid));
     }
+
 }
