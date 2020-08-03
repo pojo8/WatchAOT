@@ -3,7 +3,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import About from "./components/About";
 import Contact from "./components/Contact";
-import Episodes from "./components/Episodes";
+import Seasons from "./components/Seasons";
 import Home from "./components/Home";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -30,11 +30,6 @@ const useStyles = makeStyles((theme) => {
       width: "100%",
       marginTop: 0,
     },
-    footer: {
-      position: 'absolute',
-      height: 40,
-      bottom: 0,
-    },
   };
 });
 
@@ -49,7 +44,7 @@ export default function App() {
           <main className={classes.main}>
             <Route path="/" exact component={Home} />
             <Route path="/about" exact component={About} />
-            <Route path="/episodes" exact component={Episodes} />
+            <Route path="/seasons" exact component={Seasons} />
             <Route path="/contact" exact component={Contact} />
           </main>
         </Switch>
