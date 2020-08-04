@@ -26,9 +26,19 @@ import { Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => {
   return {
-    main: {
+    pagecontainer: {
+      position: "relative",
+      minHeight: "100vh",
+    },
+    contentwrap: {
+      padding: "3rem",
+    },
+    footercontainer: {
+      position: "absolute",
+      height: "3rem",
       width: "100%",
-      marginTop: 0,
+      textAlign: "center",
+      bottom: 0,
     },
   };
 });
@@ -37,22 +47,25 @@ export default function App() {
   const classes = useStyles();
 
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Paper elevation={2}>
-        <Switch>
-          <main className={classes.main}>
-            <Route path="/" exact component={Home} />
-            <Route path="/about" exact component={About} />
-            <Route path="/seasons" exact component={Seasons} />
-            <Route path="/contact" exact component={Contact} />
-          </main>
-        </Switch>
-        <Footer />
-      </Paper>
-    </BrowserRouter>
+    <div className={classes.pagecontainer}>
+      <BrowserRouter>
+        <Navbar />
+        <div className={classes.contentwrap}>
+          <Paper elevation={2}>
+            <Switch>
+              <main>
+                <Route path="/" exact component={Home} />
+                <Route path="/about" exact component={About} />
+                <Route path="/seasons" exact component={Seasons} />
+                <Route path="/contact" exact component={Contact} />
+              </main>
+            </Switch>
+          </Paper>
+        </div>
+        <div class={classes.footercontainer}>
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </div>
   );
 }
-
-// You can think of these components as "pages"
-// in your app.
