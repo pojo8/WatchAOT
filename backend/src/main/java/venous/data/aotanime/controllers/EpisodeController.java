@@ -70,8 +70,29 @@ public class EpisodeController {
     public Episode getEpisode(@PathVariable String eid) {
         //update the views
         epRepository.updateEpisodeView(Integer.parseInt(eid));
-
+        LOGGER.info("Updated the view count for episode id: {} by one views", eid);
         return epRepository.findAllByEpisodeId(Integer.parseInt(eid));
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/api/episodesSeason/{sid}")
+    @ResponseBody
+    public List<EpisodesReduced> getEpisodesBySeasonId(@PathVariable String sid) {
+        return epRepository.findEpisodeBySeasonId(Integer.parseInt(sid));
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/api/getMostViewedEpisodes")
+    @ResponseBody
+    public List<EpisodesReduced> getMostViewedEpisode() {
+        return epRepository.findTenMostViewedEpisodes();
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/api/getRecentEpisodes")
+    @ResponseBody
+    public List<EpisodesReduced> getMostRecentEpisode() {
+        return epRepository.findTenRecentEpisodes();
     }
 
 }

@@ -12,7 +12,6 @@ import java.util.List;
 @Repository
 public interface EpisodeRepository extends JpaRepository<Episode, Long> {
 
-
     List<Episode> findEpisodeByEpisodeIdBetween(Integer prevId, Integer nextId);
 
     Episode findAllByEpisodeId(Integer eid);
@@ -20,20 +19,28 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
     @Query(value = "SELECT episode_id, title, season_id, views FROM aot_episodes", nativeQuery = true)
     List<EpisodesReduced> findAllEpisodesReduced();
 
+    @Query(value = "Select * from aot_episodes order by views desc limit 10", nativeQuery = true)
+    List<EpisodesReduced> findTenMostViewedEpisodes();
+
+    @Query(value = "Select * from aot_episodes order by aired desc limit 10;", nativeQuery = true)
+    List<EpisodesReduced> findTenRecentEpisodes();
+
+    @Query(value = "Select * from aot_episodes Where season_id = 1 ORDER BY episode_id asc;", nativeQuery = true)
+    List<EpisodesReduced> findEpisodeBySeasonId(Integer sid);
+
     @Transactional     // required for update and delete statements
     @Modifying(clearAutomatically = true)
     @Query( value= "UPDATE aot_episodes SET views = views + 1 WHERE episode_id =:eid", nativeQuery = true)
     void updateEpisodeView(Integer eid);
 
+    // collects all the views for a given season
+    @Query( value= "select sum(views) from aot_episodes where season_id =:sid", nativeQuery = true)
+    Integer sumOfViewsBySeasonId(int sid);
+
     public static interface EpisodesReduced {
-        // using an interface to map to values
-        // they have to have a similar name to field column
         Integer getEpisode_Id();
-
         String getTitle();
-
         Integer getSeason_Id();
-
         Integer getViews();
     }
 
