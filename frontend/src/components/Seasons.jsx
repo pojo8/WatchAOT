@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
-import SeasonsThumbnails from './SeasonsThumbnails'
-
+import SeasonsThumbnails from "./SeasonsThumbnails";
+import { makeStyles } from "@material-ui/core/styles";
 
 import { CircularProgress } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => {
+  return {};
+});
+
+//take ep # and retrieve [episode X season X] etc
 
 function Seasons() {
   const [seasons, setSeasons] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const classes = useStyles();
 
   useEffect(() => {
     fetch("http://localhost:8080/api/allSeasons", {
@@ -23,7 +30,7 @@ function Seasons() {
 
   return (
     <div>
-      <h1>Season List</h1>
+      <h1>Seasons</h1>
       {isLoading && <CircularProgress />}
       <SeasonsThumbnails seasons={seasons} />
     </div>

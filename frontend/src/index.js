@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import "./index.css";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core";
 
 // use a theme provider on the top level of our app to allow these declared css-type styles to be accessible from anywhere in the app

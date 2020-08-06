@@ -40,6 +40,9 @@ const useStyles = makeStyles((theme) => {
       textAlign: "center",
       bottom: 0,
     },
+    paper: {
+      padding: "2em",
+    },
   };
 });
 
@@ -51,7 +54,7 @@ export default function App() {
       <BrowserRouter>
         <Navbar />
         <div className={classes.contentwrap}>
-          <Paper elevation={2}>
+          <Paper elevation={2} className={classes.paper}>
             <Switch>
               <main>
                 <Route path="/" exact component={Home} />

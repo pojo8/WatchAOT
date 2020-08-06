@@ -1,9 +1,24 @@
 import React from "react";
+import Seasons from "./Seasons";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => {
+  return {
+    home: {
+      textAlign: "center",
+    },
+  };
+});
 
 function Home() {
+  const classes = useStyles();
+
   return (
-    <div>
-      <h1>Home page content will go here</h1>
+    <div className={classes.home}>
+      <h1>Home</h1>
+      {/* site desc/introduction 
+      or other component goes here */}
+      <Seasons />
     </div>
   );
 }
