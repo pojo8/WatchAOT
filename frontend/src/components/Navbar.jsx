@@ -32,7 +32,7 @@ function Navbar() {
       >
         <Tab label={<Home />} to="/" component={Link} />
         <Tab label="About" to="/about" component={Link} />
-        <Tab label="Seasons" to="/seasons" component={Link} />
+        <Tab label="Episodes" to="/episodes" component={Link} />
         <Tab label="Contact" to="/contact" component={Link} />
       </Tabs>
     </>

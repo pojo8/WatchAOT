@@ -3,7 +3,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import About from "./components/About";
 import Contact from "./components/Contact";
-import Seasons from "./components/Seasons";
+import Episodes from "./components/Episodes";
 import Home from "./components/Home";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -59,7 +59,8 @@ export default function App() {
               <main>
                 <Route path="/" exact component={Home} />
                 <Route path="/about" exact component={About} />
-                <Route path="/seasons" exact component={Seasons} />
+                <Route path="/episodes" exact component={Episodes} />
+                {/* affix optional path variable to episodes*/}
                 <Route path="/contact" exact component={Contact} />
               </main>
             </Switch>

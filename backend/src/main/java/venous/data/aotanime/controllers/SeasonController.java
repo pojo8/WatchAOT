@@ -27,31 +27,12 @@ public class SeasonController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/api/allSeasons")
     @ResponseBody
-    public List<Season> getSeason() {
+    public List<Season> getSeasons() {
         List<Season> seasons = seasonRepository.findAll();
         for (Season season : seasons) {
             LOGGER.info("Title: {}", season.getTitle());
         }
         return seasons;
-    }
-
-    // Returns the information for season above and below elements
-    //http://localhost:8080/api/seasonNear/1
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/api/seasonNear/{sid}")
-    @ResponseBody
-    public List<Season> getSeasonNear(@PathVariable String sid) {
-        List<Season> seasons = seasonRepository.findSeasonBySeasonIdBetween(Integer.parseInt(sid) - 1, Integer.parseInt(sid) + 1);
-        return seasons;
-    }
-
-    // Returns the information for season above and below elements
-    //http://localhost:8080/api/season/1
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/api/season/{sid}")
-    @ResponseBody
-    public Season getSeason(@PathVariable String sid) {
-        return seasonRepository.findSeasonBySeasonId(Integer.parseInt(sid));
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
