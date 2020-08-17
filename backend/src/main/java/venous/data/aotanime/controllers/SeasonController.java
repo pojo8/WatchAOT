@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import venous.data.aotanime.models.Season;
 import venous.data.aotanime.repositories.EpisodeRepository;
 import venous.data.aotanime.repositories.SeasonRepository;
+import venous.data.aotanime.repositories.SeasonRepository.SeasonReduced;
+
 
 import java.util.List;
 
@@ -43,6 +45,15 @@ public class SeasonController {
         Integer views =  epRepository.sumOfViewsBySeasonId(Integer.parseInt(sid));
         seasonRepository.updateSeasonViews(Integer.parseInt(sid), views);
         LOGGER.info("Updated the view count for season id: {} to {} views", sid, views);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/api/getSeasonsLike/{title}")
+    @ResponseBody
+    public List<SeasonReduced> getSeasonsLike(@PathVariable String title) {
+        // first gets all the views for a season
+        List <SeasonReduced> foundSesasons = seasonRepository.findAllByTitleContainingOrderBySeasonIdDesc(title);
+        return foundSesasons;
     }
 
 }

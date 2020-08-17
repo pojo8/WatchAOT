@@ -12,9 +12,11 @@ public class Episode {
     private Integer episodeId;
 
     @Column(nullable = false)
-    private String title;
+    private String episodeTitle;
 
-//    @ForeignKey()
+    private String episodeNumber;
+
+    //    @ForeignKey()
     private Integer seasonId;
 
     private String source1;
@@ -28,15 +30,15 @@ public class Episode {
     private String source5;
 
     private Integer views;
-    private String airedDate;
+    private String aired;
 
-    public Episode(){}
+    public Episode() {
+    }
 
-    public Episode(Integer episodeId, String title, Integer seasonId,
-                   String source1, String source2, String source3, String source4,
-                   String source5, Integer views, String airedDate) {
+    public Episode(Integer episodeId, String episodeTitle, String episodeNumber, Integer seasonId, String source1, String source2, String source3, String source4, String source5, Integer views, String airedDate) {
         this.episodeId = episodeId;
-        this.title = title;
+        this.episodeTitle = episodeTitle;
+        this.episodeNumber = episodeNumber;
         this.seasonId = seasonId;
         this.source1 = source1;
         this.source2 = source2;
@@ -44,7 +46,7 @@ public class Episode {
         this.source4 = source4;
         this.source5 = source5;
         this.views = views;
-        this.airedDate = airedDate;
+        this.aired = aired;
     }
 
     public Integer getEpisodeId() {
@@ -55,12 +57,20 @@ public class Episode {
         this.episodeId = episodeId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getEpisodeTitle() {
+        return episodeTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setEpisodeTitle(String episodeTitle) {
+        this.episodeTitle = episodeTitle;
+    }
+
+    public String getEpisodeNumber() {
+        return episodeNumber;
+    }
+
+    public void setEpisodeNumber(String episodeNumber) {
+        this.episodeNumber = episodeNumber;
     }
 
     public Integer getSeasonId() {
@@ -120,10 +130,10 @@ public class Episode {
     }
 
     public String getAiredDate() {
-        return airedDate;
+        return aired;
     }
 
     public void setAiredDate(String airedDate) {
-        this.airedDate = airedDate;
+        this.aired = airedDate;
     }
 }

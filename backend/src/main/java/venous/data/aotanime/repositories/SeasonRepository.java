@@ -15,8 +15,10 @@ public interface SeasonRepository extends JpaRepository<Season, Long> {
 
     List<Season> findSeasonBySeasonIdBetween(Integer prevId, Integer nextId);
 
-    @Query(value = "SELECT title, description, season_id, viewed, thumbnail FROM season_listings", nativeQuery = true)
+    @Query(value = "SELECT title, description, season_id, viewed, thumbnail FROM season_listings order by season_id asc", nativeQuery = true)
     List<SeasonReduced> findAllSeasonsReduced();
+
+    List<SeasonReduced> findAllByTitleContainingOrderBySeasonIdDesc(String title);
 
     Season findSeasonBySeasonId(Integer sid);
 
@@ -28,7 +30,7 @@ public interface SeasonRepository extends JpaRepository<Season, Long> {
     public static interface SeasonReduced {
         String getDescription();
         String getTitle();
-        Integer getSeason_Id();
+        Integer getSeasonId();
         Integer getViewed();
         String getThumbnail();
     }

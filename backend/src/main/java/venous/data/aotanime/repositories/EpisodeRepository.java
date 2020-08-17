@@ -16,7 +16,7 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
 
     Episode findAllByEpisodeId(Integer eid);
 
-    @Query(value = "SELECT episode_id, title, season_id, views FROM aot_episodes", nativeQuery = true)
+    @Query(value = "SELECT episode_id, episode_title, episode_number season_id, views FROM aot_episodes order by aired desc", nativeQuery = true)
     List<EpisodesReduced> findAllEpisodesReduced();
 
     @Query(value = "Select * from aot_episodes order by views desc limit 10", nativeQuery = true)
@@ -39,7 +39,8 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
 
     public static interface EpisodesReduced {
         Integer getEpisode_Id();
-        String getTitle();
+        String getEpisode_Title();
+        String getEpisode_Number();
         Integer getSeason_Id();
         Integer getViews();
     }

@@ -3,10 +3,11 @@ create table aot_episodes
     episode_id serial not null
         constraint aot_episodes_pk
             primary key,
-    title varchar(60),
+    episode_title  varchar(80),
     season_id integer not null
         constraint season_id_fk
             references season_listings,
+    episode_number varchar(5),
     source1 varchar(120),
     source2 varchar(120),
     source3 varchar(120),
