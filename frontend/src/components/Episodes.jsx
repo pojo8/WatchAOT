@@ -1,6 +1,6 @@
 // this will house the season component and some other stuff
 import React, { useState, useEffect } from "react";
-import SeasonsThumbnails from "./SeasonsThumbnails";
+import EpisodeList from "./EpisodeList";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { CircularProgress } from "@material-ui/core";
@@ -13,25 +13,12 @@ const useStyles = makeStyles((theme) => {
 
 function Episodes() {
   const [episodes, setEpisodes] = useState([]);
-  const [season, setSeason] = useState([]);
+  const [seasonEpisodes, setSeasonEpisodes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const classes = useStyles();
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/episodesSeason/:seasonId`, {
-      method: "GET",
-      headers: new Headers({}),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setSeason(res);
-        setIsLoading(false);
-      })
-      .catch((error) => console.log(error));
-  }, []);
-
-  useEffect(() => {
-    fetch(`http://localhost:8080/api/findAllEpisodes`, {
+    fetch(`http://localhost:8080/api/findAllEpisodesReduced`, {
       method: "GET",
       headers: new Headers({}),
     })
@@ -43,11 +30,14 @@ function Episodes() {
       .catch((error) => console.log(error));
   }, []);
 
+  return (
+    <div>
+      <h1>Episodes</h1>
 
-  console.log('==========season==========', season);
-  console.log('==========episodes==========', episodes);
-  
-  return <div>{/* list of episodes */}</div>;
+      {isLoading && <CircularProgress />}
+      <EpisodeList episodes={episodes} />
+    </div>
+  );
 }
 
 export default Episodes;
