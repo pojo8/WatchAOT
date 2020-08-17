@@ -16,8 +16,15 @@ function Home() {
   return (
     <div className={classes.home}>
       <h1>Home</h1>
-      {/* site desc/introduction 
-      or other component goes here */}
+      <p>
+        Created by two software engineers as an ongoing side project,
+        WatchAOTepisodes is a site where you can, you guessed it, watch Attack
+        on Titan! We aim to upload episodes as soon as they become available, so
+        hopefully this becomes your go-to location for your Attack on Titan
+        binge watching needs!
+      </p>
+
+      {/* latest attack on titan episodes component */}
       <Seasons />
     </div>
   );

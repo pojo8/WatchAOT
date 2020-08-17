@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
@@ -30,20 +30,16 @@ const useStyles = makeStyles((theme) => {
 function SeasonsInfo({ season, index }) {
   const history = useHistory();
   const classes = useStyles();
-  console.log("==========season==========", season);
-  const goToSeason = () => history.push(`/episodes/season/${season.seasonId}`);
   return (
     <Grid className={classes.grid} key={index} item>
       <Card>
-        <ButtonBase onClick={goToSeason}>
-          <CardActionArea>
-            <CardMedia className={classes.cardmedia} image={season.thumbnail} />
-            <CardContent className={classes.cardcontent}>
-              <Typography variant="h5">{season.title}</Typography>
-              <Typography variant="body2">{season.description}</Typography>
-            </CardContent>
-          </CardActionArea>
-        </ButtonBase>
+        <CardActionArea>
+          <CardMedia className={classes.cardmedia} image={season.thumbnail} />
+          <CardContent className={classes.cardcontent}>
+            <Typography variant="h5">{season.title}</Typography>
+            <Typography variant="body2">{season.description}</Typography>
+          </CardContent>
+        </CardActionArea>
       </Card>
     </Grid>
   );
