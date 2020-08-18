@@ -16,7 +16,7 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
 
     Episode findAllByEpisodeId(Integer eid);
 
-    @Query(value = "SELECT episode_id, episode_title, episode_number season_id, views FROM aot_episodes order by aired desc", nativeQuery = true)
+    @Query(value = "SELECT episode_id, episode_title, episode_number, season_id, views FROM aot_episodes order by aired desc", nativeQuery = true)
     List<EpisodesReduced> findAllEpisodesReduced();
 
     @Query(value = "Select * from aot_episodes order by views desc limit 10", nativeQuery = true)
