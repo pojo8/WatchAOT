@@ -34,8 +34,8 @@ function EpisodeList({ episodes }) {
   const [orderBy, setOrderBy] = useState("number");
   const rows = [];
 
-  function createData(number, title, season, views, watchButton) {
-    return { number, title, season, views, watchButton };
+  function createData(number, title, season, views) {
+    return { number, title, season, views };
   }
 
   function clicked(e) {
@@ -54,11 +54,37 @@ function EpisodeList({ episodes }) {
     onRequestSort(event, property);
   };
 
+  function descendingComparator(a, b, orderBy) {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  }
+
+  function getComparator(order, orderBy) {
+    return order === "desc"
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
+  }
+
+  function stableSort(array, comparator) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) return order;
+      return a[1] - b[1];
+    });
+    return stabilizedThis.map((el) => el[0]);
+  }
+
   const headCells = [
     {
       id: "number",
       numeric: true,
-      disablePadding: true,
+      disablePadding: false,
       label: "Episode number",
     },
     { id: "title", numeric: false, disablePadding: false, label: "Title" },
@@ -87,7 +113,7 @@ function EpisodeList({ episodes }) {
             {headCells.map((headCell) => (
               <TableCell
                 key={headCell.id}
-                align={headCell.numeric ? "right" : "left"}
+                align={headCell.numeric || headCell.label === "Episode number" ? "right" : "left"}
                 padding={headCell.disablePadding ? "none" : "default"}
                 sortDirection={orderBy === headCell.id ? order : false}
               >
@@ -110,16 +136,29 @@ function EpisodeList({ episodes }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, index) => (
-            <TableRow hover key={index}>
-              <TableCell>{row.number}</TableCell>
-              <TableCell onClick={clicked} component="th" scope="row">
-                {row.title}
-              </TableCell>
-              <TableCell align="right">{row.season}</TableCell>
-              <TableCell align="right">{row.views}</TableCell>
-            </TableRow>
-          ))}
+          {stableSort(rows, getComparator(order, orderBy)).map((row, index) => {
+            const labelId = `enhanced-table-checkbox-${index}`;
+            return (
+              <TableRow
+                hover
+                // onClick={(event) => handleClick(event, row.name)}
+                tabIndex={-1}
+                key={row.number}
+              >
+                <TableCell>{row.number}</TableCell>
+                <TableCell
+                  component="th"
+                  id={labelId}
+                  scope="row"
+                  padding="none"
+                >
+                  {row.title}
+                </TableCell>
+                <TableCell align="right">{row.season}</TableCell>
+                <TableCell align="right">{row.views}</TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>
