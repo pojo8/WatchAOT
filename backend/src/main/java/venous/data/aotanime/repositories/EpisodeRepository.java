@@ -40,7 +40,7 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
     public static interface EpisodesReduced {
         Integer getEpisode_Id();
         String getEpisode_Title();
-        String getEpisode_Number();
+        Integer getEpisode_Number();
         Integer getSeason_Id();
         Integer getViews();
     }
