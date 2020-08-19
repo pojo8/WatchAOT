@@ -16,11 +16,11 @@ const useStyles = makeStyles((theme) => {
 });
 
 function EnhancedTable({ headCells, rows }) {
-  const classes = useStyles();
-
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("number");
   const [dense, setDense] = useState(false);
+  const classes = useStyles();
+
 
   const onRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";

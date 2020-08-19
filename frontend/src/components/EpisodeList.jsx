@@ -7,8 +7,8 @@ const useStyles = makeStyles((theme) => {
 });
 
 function EpisodeList({ episodes }) {
-  const classes = useStyles();
   const rows = [];
+  const classes = useStyles();
 
   const headCells = [
     {

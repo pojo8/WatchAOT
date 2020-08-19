@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => {
 
 function Episodes() {
   const [episodes, setEpisodes] = useState([]);
-  const [seasonEpisodes, setSeasonEpisodes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const classes = useStyles();
 
