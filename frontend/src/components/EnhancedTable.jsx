@@ -4,7 +4,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import EnhancedTableHead from "./EnhancedTableHead";
 import EnhancedTableBody from "./EnhancedTableBody";
-import { TableContainer, Table } from "@material-ui/core";
+import {
+  TableContainer,
+  Table,
+  FormControlLabel,
+  Switch,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => {
   return {};
@@ -15,6 +20,7 @@ function EnhancedTable({ headCells, rows }) {
 
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("number");
+  const [dense, setDense] = useState(false);
 
   const onRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -48,9 +54,17 @@ function EnhancedTable({ headCells, rows }) {
     return stabilizedThis.map((el) => el[0]);
   }
 
+  const handleChangeDense = (event) => {
+    setDense(event.target.checked);
+  };
+
   return (
     <TableContainer>
-      <Table aria-label="simple table">
+      <FormControlLabel
+        control={<Switch checked={dense} onChange={handleChangeDense} />}
+        label="Dense padding"
+      />
+      <Table aria-label="simple table" size={dense ? "small" : "medium"}>
         <EnhancedTableHead
           headCells={headCells}
           order={order}
