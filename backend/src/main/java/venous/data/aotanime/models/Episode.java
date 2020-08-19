@@ -14,7 +14,7 @@ public class Episode {
     @Column(nullable = false)
     private String episodeTitle;
 
-    private String episodeNumber;
+    private Integer episodeNumber;
 
     //    @ForeignKey()
     private Integer seasonId;
@@ -35,7 +35,7 @@ public class Episode {
     public Episode() {
     }
 
-    public Episode(Integer episodeId, String episodeTitle, String episodeNumber, Integer seasonId, String source1, String source2, String source3, String source4, String source5, Integer views, String airedDate) {
+    public Episode(Integer episodeId, String episodeTitle, Integer episodeNumber, Integer seasonId, String source1, String source2, String source3, String source4, String source5, Integer views, String airedDate) {
         this.episodeId = episodeId;
         this.episodeTitle = episodeTitle;
         this.episodeNumber = episodeNumber;
@@ -65,11 +65,11 @@ public class Episode {
         this.episodeTitle = episodeTitle;
     }
 
-    public String getEpisodeNumber() {
+    public Integer getEpisodeNumber() {
         return episodeNumber;
     }
 
-    public void setEpisodeNumber(String episodeNumber) {
+    public void setEpisodeNumber(Integer episodeNumber) {
         this.episodeNumber = episodeNumber;
     }
 

@@ -4,7 +4,7 @@ create table aot_episodes
         constraint aot_episodes_pk
             primary key,
     episode_title  varchar(80),
-    episode_number varchar(5),
+    episode_number integer,
     season_id integer not null
         constraint season_id_fk
             references season_listings,
