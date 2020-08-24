@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => {
 
 function Episodes() {
   const [episodes, setEpisodes] = useState([]);
+  const [seasons, setSeasons] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const classes = useStyles();
 
@@ -29,12 +30,25 @@ function Episodes() {
       .catch((error) => console.log(error));
   }, []);
 
+  useEffect(() => {
+    fetch("http://localhost:8080/api/allSeasons", {
+      method: "GET",
+      headers: new Headers({}),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setSeasons(res);
+        setIsLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
     <div>
       <h1>Episodes</h1>
 
       {isLoading && <CircularProgress />}
-      <EpisodeList episodes={episodes} />
+      <EpisodeList episodes={episodes} seasons={seasons} />
     </div>
   );
 }
