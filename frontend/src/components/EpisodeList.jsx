@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Tabs, Tab } from "@material-ui/core";
 import EnhancedTable from "./EnhancedTable";
-import TabPanel from "./TabPanel";
 
 const useStyles = makeStyles((theme) => {
-  return {};
+  return {
+    tabs: {
+      borderRight: `1px solid ${theme.palette.divider}`,
+    },
+    container: {
+      display: "flex",
+    },
+  };
 });
 
 function EpisodeList({ episodes, seasons }) {
@@ -34,7 +40,7 @@ function EpisodeList({ episodes, seasons }) {
   }
 
   episodes.forEach((episode) => {
-    // season 
+    // since index starts at 0, we add 1 to make it equal to season numbers/id's
     if (season + 1 === episode.season_Id) {
       rows.push(
         createData(
@@ -48,7 +54,7 @@ function EpisodeList({ episodes, seasons }) {
   });
 
   return (
-    <>
+    <div className={classes.container}>
       <Tabs
         orientation="vertical"
         variant="scrollable"
@@ -61,11 +67,8 @@ function EpisodeList({ episodes, seasons }) {
           <Tab label={"Season " + season.seasonId} />
         ))}
       </Tabs>
-      {seasons.map((season) => (
-        <TabPanel value={season} index={season}></TabPanel>
-      ))}
       <EnhancedTable headCells={headCells} rows={rows} />
-    </>
+    </div>
   );
 }
 

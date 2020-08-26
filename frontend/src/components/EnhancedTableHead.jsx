@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => {
       padding: 0,
       position: "absolute",
       top: 20,
-      width: 1,
     },
   };
 });
