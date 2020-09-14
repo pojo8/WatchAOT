@@ -27,7 +27,6 @@ function EpisodeList({ episodes, seasons }) {
       label: "Episode number",
     },
     { id: "title", numeric: false, label: "Title" },
-    { id: "season", numeric: true, label: "Season" },
     { id: "views", numeric: true, label: "Views" },
   ];
 
@@ -46,7 +45,6 @@ function EpisodeList({ episodes, seasons }) {
         createData(
           episode.episode_Number,
           episode.episode_Title,
-          episode.season_Id,
           episode.views
         )
       );

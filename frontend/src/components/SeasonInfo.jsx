@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CustomDialog from "./CustomDialog";
 import { useHistory, Redirect, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -23,6 +24,10 @@ const useStyles = makeStyles((theme) => {
       border: "2px solid #000",
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
+      position: "fixed",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
     },
     grid: {
       alignItems: "center",
@@ -35,47 +40,31 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
 function SeasonsInfo({ season, index }) {
   const [openModal, setOpenModal] = useState(false);
-  const [modalStyle] = useState(getModalStyle);
+  const [isOpen, setIsOpen] = useState(false);
 
   const history = useHistory();
   const classes = useStyles();
 
-  const handleClick = (event) => {
-    setOpenModal(true);
-    console.log("==========event==========", event);
+  const handleDialogOpen = () => {
+    setIsOpen(true);
   };
-  const handleClose = () => setOpenModal(false);
+
+  const handleDialogClose = () => setIsOpen(false);
 
   return (
     <>
-      <Modal open={openModal} onClose={handleClose}>
-        <div style={modalStyle} className={classes.season}>
-          <h2 id="simple-modal-title">Text in a modal</h2>
-          <p id="simple-modal-description">
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </p>
-        </div>
-      </Modal>
+      <CustomDialog
+        isOpen={isOpen}
+        handleClose={handleDialogClose}
+        title="TESTING"
+      >
+        <h1>HI THERE!</h1>
+      </CustomDialog>
       <Grid className={classes.grid} key={index} item>
         <Card>
-          <CardActionArea onClick={handleClick}>
+          <CardActionArea onClick={handleDialogOpen}>
             <CardMedia className={classes.cardmedia} image={season.thumbnail} />
             <CardContent className={classes.cardcontent}>
               <Typography variant="h5">{season.title}</Typography>
