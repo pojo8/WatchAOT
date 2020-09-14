@@ -7,6 +7,7 @@ create table season_listings
     season_id serial not null
         constraint season_listings_pk
             primary key,
-    thumbnail   varchar(120)
-);
+    thumbnail   varchar(120),
+    ratings numeric default 0
 
+);
