@@ -16,5 +16,7 @@ create table aot_episodes
     source6 varchar(120),
     aired date,
     views integer default 0,
-    ratings numeric default 0
+    ratings numeric default 0,
+    votes integer default 0,
+    score numeric default 0
 );

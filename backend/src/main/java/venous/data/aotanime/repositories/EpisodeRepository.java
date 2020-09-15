@@ -16,7 +16,7 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
 
     Episode findAllByEpisodeId(Integer eid);
 
-    @Query(value = "SELECT episode_id, episode_title, episode_number, season_id, views FROM aot_episodes order by aired desc", nativeQuery = true)
+    @Query(value = "SELECT episode_id, episode_title, episode_number, season_id, views, score FROM aot_episodes order by aired desc", nativeQuery = true)
     List<EpisodesReduced> findAllEpisodesReduced();
 
     @Query(value = "Select * from aot_episodes order by views desc limit 10", nativeQuery = true)
@@ -33,6 +33,13 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
     @Query( value= "UPDATE aot_episodes SET views = views + 1 WHERE episode_id =:eid", nativeQuery = true)
     void updateEpisodeView(Integer eid);
 
+
+    // Calculates the score as the ratings are supplied
+    @Transactional
+    @Modifying(clearAutomatically = true)
+    @Query( value= "UPDATE aot_episodes SET ratings =ratings + :rating, votes = votes + 1, score = ratings / votes WHERE episode_id =:eid", nativeQuery = true)
+    void updateEpisodeRating(Double rating, Integer eid);
+
     // collects all the views for a given season
     @Query( value= "select sum(views) from aot_episodes where season_id =:sid", nativeQuery = true)
     Integer sumOfViewsBySeasonId(int sid);
@@ -43,6 +50,7 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
         Integer getEpisode_Number();
         Integer getSeason_Id();
         Integer getViews();
+        Double getScore();
     }
 
 }

@@ -28,14 +28,18 @@ public class Episode {
     private String source4;
 
     private String source5;
-
     private Integer views;
     private String aired;
+    private Double ratings;
+    private Integer votes;
+    private Double score;
 
     public Episode() {
     }
 
-    public Episode(Integer episodeId, String episodeTitle, Integer episodeNumber, Integer seasonId, String source1, String source2, String source3, String source4, String source5, Integer views, String airedDate) {
+    public Episode(Integer episodeId, String episodeTitle, Integer episodeNumber, Integer seasonId,
+                   String source1, String source2, String source3, String source4, String source5,
+                   Integer views, String aired, Double ratings, Integer votes, double score) {
         this.episodeId = episodeId;
         this.episodeTitle = episodeTitle;
         this.episodeNumber = episodeNumber;
@@ -47,6 +51,9 @@ public class Episode {
         this.source5 = source5;
         this.views = views;
         this.aired = aired;
+        this.ratings = ratings;
+        this.votes = votes;
+        this.score = score;
     }
 
     public Integer getEpisodeId() {
@@ -129,11 +136,35 @@ public class Episode {
         this.views = views;
     }
 
-    public String getAiredDate() {
+    public String getAired() {
         return aired;
     }
 
-    public void setAiredDate(String airedDate) {
-        this.aired = airedDate;
+    public void setAired(String aired) {
+        this.aired = aired;
+    }
+
+    public double getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Double ratings) {
+        this.ratings = ratings;
+    }
+
+    public Integer getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Integer votes) {
+        this.votes = votes;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
     }
 }

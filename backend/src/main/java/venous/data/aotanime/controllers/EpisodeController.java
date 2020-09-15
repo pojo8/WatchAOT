@@ -56,8 +56,8 @@ public class EpisodeController {
 
         for (Episode ep : episodes) {
             LOGGER.info("Title: {}", ep.getSource1());
+            LOGGER.info("Ratings: {}", ep.getRatings());
         }
-
         return episodes;
     }
 
@@ -71,6 +71,18 @@ public class EpisodeController {
         //update the views
         epRepository.updateEpisodeView(Integer.parseInt(eid));
         LOGGER.info("Updated the view count for episode id: {} by one views", eid);
+        return epRepository.findAllByEpisodeId(Integer.parseInt(eid));
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/api/rate/{eid}/{rating}")
+    @ResponseBody
+    public Episode updateRating(@PathVariable String rating,@PathVariable String eid) {
+        //update the views
+        epRepository.updateEpisodeRating(Double.parseDouble(rating),Integer.parseInt(eid));
+        LOGGER.info("Updated the Rating for episode id: {} with the following Rating {}", eid, rating);
+
+//        epRepository.updateEpisodeScore(Integer.);
         return epRepository.findAllByEpisodeId(Integer.parseInt(eid));
     }
 

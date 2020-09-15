@@ -17,7 +17,7 @@ public class Season {
 
 //    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date airedDate;
+    private Date aired;
 
     private String description;
 
@@ -25,16 +25,20 @@ public class Season {
 
     private String thumbnail;
 
+    private Double ratings;
+
 
     public Season(){}
 
-    public Season(Integer seasonId, String title, Date airedDate, String description, int viewed, String thumbnail) {
+    public Season(Integer seasonId, String title, Date aired,
+                  String description, int viewed, String thumbnail, Double ratings) {
         this.seasonId = seasonId;
         this.title = title;
-        this.airedDate = airedDate;
+        this.aired = aired;
         this.description = description;
         this.viewed = viewed;
         this.thumbnail = thumbnail;
+        this.ratings = ratings;
     }
 
     public Integer getSeasonId() {
@@ -53,12 +57,12 @@ public class Season {
         this.title = title;
     }
 
-    public Date getAiredDate() {
-        return airedDate;
+    public Date getAired() {
+        return aired;
     }
 
-    public void setAiredDate(Date airedDate) {
-        this.airedDate = airedDate;
+    public void setAired(Date airedDate) {
+        this.aired = airedDate;
     }
 
     public String getDescription() {
@@ -83,5 +87,13 @@ public class Season {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public double getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Double ratings) {
+        this.ratings = ratings;
     }
 }
