@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomDialog from "./CustomDialog";
-import { useHistory, Redirect, Link } from "react-router-dom";
+import EnhancedTable from "./EnhancedTable";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
@@ -43,9 +44,50 @@ const useStyles = makeStyles((theme) => {
 function SeasonsInfo({ season, index }) {
   const [openModal, setOpenModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [episodes, setEpisodes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  // get seasonsbyid
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/episodesSeason/" + season.seasonId, {
+      method: "GET",
+      headers: new Headers({}),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setEpisodes(res);
+        setIsLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  function createData(number, title, season, views) {
+    return { number, title, season, views };
+  }
 
   const history = useHistory();
   const classes = useStyles();
+
+  const rows = [];
+  const headCells = [
+    {
+      id: "number",
+      numeric: true,
+      disablePadding: false,
+      label: "Episode number",
+    },
+    { id: "title", numeric: false, label: "Title" },
+    { id: "views", numeric: true, label: "Views" },
+  ];
+
+  console.log("==========season==========", season);
+
+  episodes.forEach((episode) => {
+    // since index starts at 0, we add 1 to make it equal to season numbers/id's
+    rows.push(
+      createData(episode.episode_Number, episode.episode_Title, episode.views)
+    );
+  });
 
   const handleDialogOpen = () => {
     setIsOpen(true);
@@ -60,7 +102,7 @@ function SeasonsInfo({ season, index }) {
         handleClose={handleDialogClose}
         title="TESTING"
       >
-        <h1>HI THERE!</h1>
+        <EnhancedTable headCells={headCells} rows={rows} />
       </CustomDialog>
       <Grid className={classes.grid} key={index} item>
         <Card>
