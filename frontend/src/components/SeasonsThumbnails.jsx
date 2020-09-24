@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-function SeasonsThumbnails({ seasons }) {
+function SeasonsThumbnails({ seasons, episodes }) {
   const classes = useStyles();
 
   return (
@@ -20,7 +20,7 @@ function SeasonsThumbnails({ seasons }) {
       <Grid item className={classes.griditems}>
         <Grid container justify="center" spacing={5}>
           {seasons.map((season, index) => (
-            <SeasonInfo season={season} index={index} />
+            <SeasonInfo season={season} episodes={episodes} index={index} />
           ))}
         </Grid>
       </Grid>

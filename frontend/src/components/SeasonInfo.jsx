@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import CustomDialog from "./CustomDialog";
 import EnhancedTable from "./EnhancedTable";
 import { useHistory } from "react-router-dom";
@@ -42,24 +42,10 @@ const useStyles = makeStyles((theme) => {
 });
 
 function SeasonsInfo({ season, index }) {
-  const [openModal, setOpenModal] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [episodes, setEpisodes] = useState([]);
+  const [rows, setRows] = useState([]);
+  const [isSending, setIsSending] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  // get seasonsbyid
-
-  useEffect(() => {
-    fetch("http://localhost:8080/api/episodesSeason/" + season.seasonId, {
-      method: "GET",
-      headers: new Headers({}),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setEpisodes(res);
-        setIsLoading(false);
-      })
-      .catch((error) => console.log(error));
-  }, []);
 
   function createData(number, title, season, views) {
     return { number, title, season, views };
@@ -68,7 +54,6 @@ function SeasonsInfo({ season, index }) {
   const history = useHistory();
   const classes = useStyles();
 
-  const rows = [];
   const headCells = [
     {
       id: "number",
@@ -80,18 +65,41 @@ function SeasonsInfo({ season, index }) {
     { id: "views", numeric: true, label: "Views" },
   ];
 
-  console.log("==========season==========", season);
+  async function getSeasonEpisodes(season) {
+    // need to refactor & add this to external helper
+    await fetch("http://localhost:8080/api/episodesSeason/" + season.seasonId, {
+      method: "GET",
+      headers: new Headers({}),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        const rows = [];
+        res.forEach((episode) => {
+          rows.push(
+            createData(
+              episode.episode_Number,
+              episode.episode_Title,
+              episode.views
+            )
+          );
+        });
+        setRows(rows);
+        setIsLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }
 
-  episodes.forEach((episode) => {
-    // since index starts at 0, we add 1 to make it equal to season numbers/id's
-    rows.push(
-      createData(episode.episode_Number, episode.episode_Title, episode.views)
-    );
-  });
-
-  const handleDialogOpen = () => {
+  const handleDialogOpen = useCallback(async () => {
+    // don't send again while we are sending
+    if (isSending) return;
+    // update state
+    setIsSending(true);
+    // send the actual request
+    await getSeasonEpisodes(season);
+    // once the request is sent, update state again
+    setIsSending(false);
     setIsOpen(true);
-  };
+  }, [isSending]);
 
   const handleDialogClose = () => setIsOpen(false);
 
