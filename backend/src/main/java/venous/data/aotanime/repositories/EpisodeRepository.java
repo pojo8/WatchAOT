@@ -25,7 +25,7 @@ public interface EpisodeRepository extends JpaRepository<Episode, Long> {
     @Query(value = "Select * from aot_episodes order by aired desc limit 10;", nativeQuery = true)
     List<EpisodesReduced> findTenRecentEpisodes();
 
-    @Query(value = "Select * from aot_episodes Where season_id = 1 ORDER BY episode_id asc;", nativeQuery = true)
+    @Query(value = "Select * from aot_episodes Where season_id = :sid ORDER BY episode_id asc;", nativeQuery = true)
     List<EpisodesReduced> findEpisodeBySeasonId(Integer sid);
 
     @Transactional     // required for update and delete statements
