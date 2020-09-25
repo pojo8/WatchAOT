@@ -1,8 +1,14 @@
 package venous.data.aotanime.models;
 
+import lombok.*;
+
 import javax.persistence.*;
 
-
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity(name= "Episode")
 @Table(name = "aot_episodes")
 public class Episode {
@@ -34,137 +40,4 @@ public class Episode {
     private Integer votes;
     private Double score;
 
-    public Episode() {
-    }
-
-    public Episode(Integer episodeId, String episodeTitle, Integer episodeNumber, Integer seasonId,
-                   String source1, String source2, String source3, String source4, String source5,
-                   Integer views, String aired, Double ratings, Integer votes, double score) {
-        this.episodeId = episodeId;
-        this.episodeTitle = episodeTitle;
-        this.episodeNumber = episodeNumber;
-        this.seasonId = seasonId;
-        this.source1 = source1;
-        this.source2 = source2;
-        this.source3 = source3;
-        this.source4 = source4;
-        this.source5 = source5;
-        this.views = views;
-        this.aired = aired;
-        this.ratings = ratings;
-        this.votes = votes;
-        this.score = score;
-    }
-
-    public Integer getEpisodeId() {
-        return episodeId;
-    }
-
-    public void setEpisodeId(Integer episodeId) {
-        this.episodeId = episodeId;
-    }
-
-    public String getEpisodeTitle() {
-        return episodeTitle;
-    }
-
-    public void setEpisodeTitle(String episodeTitle) {
-        this.episodeTitle = episodeTitle;
-    }
-
-    public Integer getEpisodeNumber() {
-        return episodeNumber;
-    }
-
-    public void setEpisodeNumber(Integer episodeNumber) {
-        this.episodeNumber = episodeNumber;
-    }
-
-    public Integer getSeasonId() {
-        return seasonId;
-    }
-
-    public void setSeasonId(Integer seasonId) {
-        this.seasonId = seasonId;
-    }
-
-    public String getSource1() {
-        return source1;
-    }
-
-    public void setSource1(String source1) {
-        this.source1 = source1;
-    }
-
-    public String getSource2() {
-        return source2;
-    }
-
-    public void setSource2(String source2) {
-        this.source2 = source2;
-    }
-
-    public String getSource3() {
-        return source3;
-    }
-
-    public void setSource3(String source3) {
-        this.source3 = source3;
-    }
-
-    public String getSource4() {
-        return source4;
-    }
-
-    public void setSource4(String source4) {
-        this.source4 = source4;
-    }
-
-    public String getSource5() {
-        return source5;
-    }
-
-    public void setSource5(String source5) {
-        this.source5 = source5;
-    }
-
-    public Integer getViews() {
-        return views;
-    }
-
-    public void setViews(Integer views) {
-        this.views = views;
-    }
-
-    public String getAired() {
-        return aired;
-    }
-
-    public void setAired(String aired) {
-        this.aired = aired;
-    }
-
-    public double getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(Double ratings) {
-        this.ratings = ratings;
-    }
-
-    public Integer getVotes() {
-        return votes;
-    }
-
-    public void setVotes(Integer votes) {
-        this.votes = votes;
-    }
-
-    public Double getScore() {
-        return score;
-    }
-
-    public void setScore(Double score) {
-        this.score = score;
-    }
 }
