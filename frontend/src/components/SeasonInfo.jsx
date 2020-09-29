@@ -108,7 +108,7 @@ function SeasonsInfo({ season, index }) {
       <CustomDialog
         isOpen={isOpen}
         handleClose={handleDialogClose}
-        title="TESTING"
+        title={`Season ${season.seasonId}`}
       >
         <EnhancedTable headCells={headCells} rows={rows} />
       </CustomDialog>
