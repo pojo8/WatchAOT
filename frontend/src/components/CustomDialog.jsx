@@ -58,10 +58,10 @@ function CustomDialog({ isOpen, handleClose, title, subtitle, children }) {
 
 export default CustomDialog;
 
-// CustomDialog.PropTypes = {
-//   isOpen: PropTypes.bool.isRequired,
-//   handleClose: PropTypes.func.isRequired,
-//   title: PropTypes.string.isRequired,
-//   subtitle: PropTypes.string,
-//   children: PropTypes.element.isRequired,
-// };
+CustomDialog.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  children: PropTypes.element.isRequired,
+};

@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import CustomDialog from "./CustomDialog";
 import EnhancedTable from "./EnhancedTable";
-import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
@@ -10,7 +9,6 @@ import {
   Typography,
   CardContent,
   CardActionArea,
-  Modal,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => {
@@ -25,7 +23,6 @@ const useStyles = makeStyles((theme) => {
       border: "2px solid #000",
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
-      position: "fixed",
       top: "50%",
       left: "50%",
       transform: "translate(-50%, -50%)",
@@ -45,13 +42,11 @@ function SeasonsInfo({ season, index }) {
   const [isOpen, setIsOpen] = useState(false);
   const [rows, setRows] = useState([]);
   const [isSending, setIsSending] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   function createData(number, title, season, views) {
     return { number, title, season, views };
   }
 
-  const history = useHistory();
   const classes = useStyles();
 
   const headCells = [
@@ -65,7 +60,7 @@ function SeasonsInfo({ season, index }) {
     { id: "views", numeric: true, label: "Views" },
   ];
 
-  async function getSeasonEpisodes(season) {
+  const getSeasonEpisodes = useCallback(async (season) => {
     // need to refactor & add this to external helper
     await fetch("http://localhost:8080/api/episodesSeason/" + season.seasonId, {
       method: "GET",
@@ -84,22 +79,17 @@ function SeasonsInfo({ season, index }) {
           );
         });
         setRows(rows);
-        setIsLoading(false);
       })
       .catch((error) => console.log(error));
-  }
+  }, []);
 
   const handleDialogOpen = useCallback(async () => {
-    // don't send again while we are sending
     if (isSending) return;
-    // update state
     setIsSending(true);
-    // send the actual request
     await getSeasonEpisodes(season);
-    // once the request is sent, update state again
     setIsSending(false);
     setIsOpen(true);
-  }, [isSending]);
+  }, [isSending, season, getSeasonEpisodes]);
 
   const handleDialogClose = () => setIsOpen(false);
 

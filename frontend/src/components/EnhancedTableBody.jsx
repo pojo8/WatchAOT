@@ -1,12 +1,7 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 
 import { TableCell, TableRow, TableBody } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => {
-  return {};
-});
 
 function EnhancedTableBody({
   rows,
@@ -15,18 +10,11 @@ function EnhancedTableBody({
   stableSort,
   getComparator,
 }) {
-  const classes = useStyles();
-
   return (
     <TableBody>
-      {stableSort(rows, getComparator(order, orderBy)).map((row, index) => {
+      {stableSort(rows, getComparator(order, orderBy)).map((row) => {
         return (
-          <TableRow
-            hover
-            // onClick={(event) => handleClick(event, row.name)}
-            tabIndex={-1}
-            key={row.number}
-          >
+          <TableRow hover tabIndex={-1} key={row.number}>
             {Object.keys(row).map((property) => (
               <TableCell
                 align={typeof row[property] === "number" ? "right" : "none"}
