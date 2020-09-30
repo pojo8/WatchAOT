@@ -31,9 +31,7 @@ function Navbar() {
         className={classes.tabs}
       >
         <Tab label={<Home />} to="/" component={Link} />
-        <Tab label="About" to="/about" component={Link} />
         <Tab label="Episodes" to="/episodes" component={Link} />
-        <Tab label="Contact" to="/contact" component={Link} />
       </Tabs>
     </>
   );
