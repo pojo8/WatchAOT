@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import CustomDialog from "./CustomDialog";
 import EnhancedTable from "./EnhancedTable";
 import { makeStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
 import {
   Grid,
   CardMedia,
@@ -116,5 +117,10 @@ function SeasonsInfo({ season, index }) {
     </>
   );
 }
+
+SeasonsInfo.propTypes = {
+  episodes: PropTypes.array.isRequired,
+  index: PropTypes.number.isRequired,
+};
 
 export default SeasonsInfo;

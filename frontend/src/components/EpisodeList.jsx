@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Tabs, Tab } from "@material-ui/core";
 import EnhancedTable from "./EnhancedTable";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -42,11 +43,7 @@ function EpisodeList({ episodes, seasons }) {
     // since index starts at 0, we add 1 to make it equal to season numbers/id's
     if (season + 1 === episode.season_Id) {
       rows.push(
-        createData(
-          episode.episode_Number,
-          episode.episode_Title,
-          episode.views
-        )
+        createData(episode.episode_Number, episode.episode_Title, episode.views)
       );
     }
   });
@@ -69,5 +66,10 @@ function EpisodeList({ episodes, seasons }) {
     </div>
   );
 }
+
+EpisodeList.propTypes = {
+  episodes: PropTypes.array.isRequired,
+  seasons: PropTypes.array.isRequired,
+};
 
 export default EpisodeList;
