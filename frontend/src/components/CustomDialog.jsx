@@ -22,7 +22,14 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-function CustomDialog({ isOpen, handleClose, title, subtitle, children }) {
+function CustomDialog({
+  isOpen,
+  handleClose,
+  title,
+  subtitle,
+  children,
+  fullScreen = false,
+}) {
   const classes = useStyles();
 
   return (
@@ -30,7 +37,8 @@ function CustomDialog({ isOpen, handleClose, title, subtitle, children }) {
       <Dialog
         fullWidth
         transitionDuration="0"
-        maxWidth="md"
+        maxWidth="lg"
+        fullScreen={fullScreen}
         open={isOpen}
         onClose={handleClose}
         aria-labelledby="max-width-dialog-title"
