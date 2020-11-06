@@ -17,12 +17,13 @@ public class Episode {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer episodeId;
 
-    @Column(nullable = false)
+    @Column(name="episode_title")
     private String episodeTitle;
 
+    @Column(name="episode_number")
     private Integer episodeNumber;
 
-    //    @ForeignKey()
+    @Column(name= "season_id")
     private Integer seasonId;
 
     private String source1;

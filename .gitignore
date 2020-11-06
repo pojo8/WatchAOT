@@ -1,4 +1,5 @@
 #Editors
+*.iml
 *.swp
 .idea/
 .vs/
